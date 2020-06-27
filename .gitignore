@@ -1,0 +1,6 @@
+# Ignore node file packages
+node_modules
+# Ignore node json logs
+package-lock.json
+# Ignore dis folder
+dist
