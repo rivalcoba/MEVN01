@@ -3,11 +3,39 @@
         <div class="max-w-xs mx-auto h-12">
             <h1 class="text-lg text-center text-gold">Register</h1>
             <div class="w-full bg-white shadow mt-5 rounded-sm p-8">
-                <input type="text" name="" id="" class="w-full focus:outline-none bg-brown-lightest p-3 text-brown px-2 mb-3" placeholder="Enter Your name">
-                <input type="text" name="" id="" class="w-full focus:outline-none bg-brown-lightest p-3 text-brown px-2 mb-3" placeholder="Enter Your email">
-                <input type="text" name="" id="" class="w-full focus:outline-none bg-brown-lightest p-3 text-brown px-2" placeholder="Enter Your password">
+                <text-input
+                :value="model.name"
+                v-model="model.name" 
+                placeholder="Enter Your Names"></text-input>
+                
+                <text-input
+                :value="model.email"
+                v-model="model.email" 
+                placeholder="Enter Your Email"></text-input>
+
+                <text-input
+                :value="model.password"
+                v-model="model.password" 
+                placeholder="Enter Your Password"></text-input>
+
+                <!-- <input type="text" class="w-full focus:outline-none bg-brown-lightest p-3 text-brown px-2 mb-3" placeholder="Enter Your email">
+                
+                <input type="text" class="w-full focus:outline-none bg-brown-lightest p-3 text-brown px-2" placeholder="Enter Your password"> -->
+                
                 <button class="w-full mt-3 py-3 bg-emerald text-white rounded-sm focus:outline-none hover:bg-emerald-light">Sing Up</button>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data: ()=>({
+        model: {
+            name:'',
+            email:'',
+            password:''
+        }
+    })
+}
+</script>

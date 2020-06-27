@@ -11,6 +11,7 @@
                 ],
                 "alias": {
                     "@": "./",
+                    "@components": "./client/components",
                     "@pages":"./client/pages",
                     "@config": "./server/config",
                     "@controllers": "./server/controllers",
