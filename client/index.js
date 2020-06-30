@@ -13,13 +13,19 @@ import Router from 'vue-router';
 // Importing the main component
 import Main from './pages/Main.vue';
 
+// Importing validator for extend rules
+import validations from './validations'
+
 // Importing custom component
-import TextInput from '@components/TextInput.vue'
+import TextInput from '@components/TextInput.vue';
 
 // Registrando el Router en Vue
 // Registra modulos como "router-link"
 // y "raouter-vue" entro otros
 Vue.use(Router);
+
+// Apply validations
+validations.apply();
 
 // Registering custom components
 Vue.component('text-input', TextInput);
