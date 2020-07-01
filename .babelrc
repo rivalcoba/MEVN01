@@ -11,11 +11,14 @@
                 ],
                 "alias": {
                     "@": "./",
+                    "@client": "./client",
                     "@components": "./client/components",
-                    "@pages":"./client/pages",
                     "@config": "./server/config",
                     "@controllers": "./server/controllers",
-                    "@routes": "./server/routes"
+                    "@models":"./server/models",
+                    "@pages":"./client/pages",
+                    "@routes": "./server/routes",
+                    "@store": "./client/store"
                 }
             }
         ]

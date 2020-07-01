@@ -33,7 +33,10 @@
 </template>
 
 <script>
+// Importing form Validators
 import {ValidationProvider, ValidationObserver, validate} from 'vee-validate';
+// Importing client requests or client actions
+import {POST_REGISTER} from '@client/store/auth/actions'
 
 export default {
     data: ()=>({
@@ -54,6 +57,7 @@ export default {
               return;
           }
           alert("Valid!")
+          this.$store.dispatch(POST_REGISTER, this.model)
       });
     }
   }

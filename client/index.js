@@ -4,6 +4,9 @@ import Vue from 'vue';
 // Importando los estilos
 import './styles/main.css';
 
+// Importintg vuex store
+import store from './store'
+
 // Importando las rutas para el Router de Vue
 import router from './routes';
 
@@ -34,5 +37,6 @@ Vue.component('text-input', TextInput);
 const app = new Vue({
     el: '#app',
     router,
+    store,
     render: h=>h(Main)
 });

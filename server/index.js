@@ -2,6 +2,10 @@
 import Express from 'express';
 // Importing ORM Mongoose
 import Mongoose from 'mongoose';
+// Registering body-parser module
+import BodyParser from 'body-parser'
+// Importing Morgan
+import Morgan from 'morgan'
 // Importing config
 import config from '@config';
 // Importing Path
@@ -25,6 +29,12 @@ Mongoose.connect(config.databaseUrl, {
 
 // Creating an instance of express
 const app = Express();
+
+// Registering body-parser
+app.use(BodyParser.json())
+
+// Registering morgan
+app.use(Morgan('tiny'));  
 
 // Creating the compiler
 const compiler = Webpack(WebpackConfig);
