@@ -4,33 +4,27 @@
             <h1 class="text-lg text-center text-gold">Register</h1>
             <div class="w-full bg-white shadow mt-5 rounded-sm p-8">
                 <ValidationObserver ref="form">
-                    <ValidationProvider name="Name" rules="required" v-slot="{errors}">
-                        <text-input
-                        name="name"
-                        :value="model.name"
-                        v-model="model.name"
-                        placeholder="Enter Your Names"></text-input>
-                        <span>{{ errors[0] }}</span>
-                    </ValidationProvider>
-                    
-                    <validation-provider  name="Email" rules="required|email" v-slot="{errors}">
-                        <text-input
-                        name="email"
-                        :value="model.email"
-                        v-model="model.email"
-                        placeholder="Enter Your Email"></text-input>
-                        <span>{{ errors[0] }}</span>
-                    </validation-provider>
+                    <text-input
+                    name="Name"
+                    rules="required"
+                    :value="model.name"
+                    v-model="model.name"
+                    placeholder="Enter Your Names"></text-input>
 
-                    <validation-provider  name="Password" rules="required|min:6" v-slot="{errors}">
-                        <text-input
-                        name="password"
-                        :value="model.password"
-                        v-model="model.password"
-                        placeholder="Enter Your Password"></text-input>
-                        <span>{{ errors[0] }}</span>
-                    </validation-provider>
-                    
+                    <text-input
+                    name="E-mail"
+                    rules="required|email"
+                    :value="model.email"
+                    v-model="model.email"
+                    placeholder="Enter Your Email"></text-input>
+
+                    <text-input
+                    name="Password"
+                    rules="required|min:6"
+                    :value="model.password"
+                    v-model="model.password"
+                    placeholder="Enter Your Password"></text-input>
+
                     <button @click="register" class="w-full mt-3 py-3 bg-emerald text-white rounded-sm focus:outline-none hover:bg-emerald-light">Sing Up</button>
                 </ValidationObserver>
             </div>
