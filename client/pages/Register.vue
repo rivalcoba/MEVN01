@@ -25,7 +25,14 @@
                     v-model="model.password"
                     placeholder="Enter Your Password"></text-input>
 
-                    <button @click="register" class="w-full mt-3 py-3 bg-emerald text-white rounded-sm focus:outline-none hover:bg-emerald-light">Sing Up</button>
+                    <btn
+                    label="Sign Up"
+                    :disabled="loading"
+                    :loading="loading"
+                    @click="register"
+                    />
+
+                    <!-- <button @click="register" class="w-full mt-3 py-3 bg-emerald text-white rounded-sm focus:outline-none hover:bg-emerald-light">Sing Up</button> -->
                 </ValidationObserver>
             </div>
         </div>
@@ -40,6 +47,7 @@ import {POST_REGISTER} from '@client/store/auth/actions'
 
 export default {
     data: ()=>({
+        loading: false,
         model: {
             name:'',
             email:'',
@@ -51,14 +59,25 @@ export default {
         ValidationObserver
     },
     methods: {
-    register() {
+    register(){
       this.$refs.form.validate().then(isValid=>{
           if(!isValid){
               return;
           }
-          alert("Valid!")
-          this.$store.dispatch(POST_REGISTER, this.model)
+          // Change loading state
+          this.toggleLoading();
+          // An action returns a promise
+        //   this.$store.dispatch(POST_REGISTER, this.model)
+        //   .then(()=>{
+        //       //alert("Finished!!!");
+        //       this.toggleLoading();
+        //       // Redirecting user to the home page
+        //       this.$router.push('/');
+        //   });
       });
+    },
+    toggleLoading(){
+        this.loading = !this.loading;
     }
   }
 }

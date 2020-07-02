@@ -21,6 +21,8 @@ import validations from './validations'
 
 // Importing custom component
 import TextInput from '@components/TextInput.vue';
+import Loader from '@components/Loader.vue';
+import Button from '@components/Button.vue';
 
 // Registrando el Router en Vue
 // Registra modulos como "router-link"
@@ -31,6 +33,8 @@ Vue.use(Router);
 validations.apply();
 
 // Registering custom components
+Vue.component('btn', Button);
+Vue.component('loader', Loader);
 Vue.component('text-input', TextInput);
 
 // Creating a new vue instance

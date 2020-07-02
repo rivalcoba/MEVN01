@@ -45,11 +45,15 @@ app.use(WebpackDevMiddleware(compiler,{
     publicPath: WebpackConfig.output.publicPath
 }));
 
-// Adding the compiler to the Hot wbpack Module
+// Adding the compiler to the Hot webpack Module
 app.use(WebpackHotMiddleware(compiler));
 
 // Add Router to the middleware chain
 app.use(v1Router);
+
+// Static server middleware, this must be defined
+// after any webpack middleware
+app.use(Express.static(path.resolve(__dirname, 'public')));
 
 // Respond any url like this...
 app.get("*",(req, res)=>{
