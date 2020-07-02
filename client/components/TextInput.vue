@@ -2,7 +2,7 @@
     <ValidationProvider :name="name" :rules="rules" v-slot="{ errors }">
     <div class="mb-3">
         <input 
-        type="text"
+        :type="type"
         :name="name"
         class="w-full focus:outline-none bg-brown-lightest p-3 text-brown" :placeholder="placeholder"
         :value="value"

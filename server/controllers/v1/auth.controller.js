@@ -16,8 +16,10 @@ const register = async (req, res) => {
         email,
         password
     });
+
+    const token = user.generateToken()
     
-    return res.status(201).json({user});
+    return res.status(201).json({user, token});
 };
 
 // Exporting methods

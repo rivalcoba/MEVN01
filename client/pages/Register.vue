@@ -19,6 +19,7 @@
                     placeholder="Enter Your Email"></text-input>
 
                     <text-input
+                    type="password"
                     name="Password"
                     rules="required|min:6"
                     :value="model.password"
@@ -67,13 +68,13 @@ export default {
           // Change loading state
           this.toggleLoading();
           // An action returns a promise
-        //   this.$store.dispatch(POST_REGISTER, this.model)
-        //   .then(()=>{
-        //       //alert("Finished!!!");
-        //       this.toggleLoading();
-        //       // Redirecting user to the home page
-        //       this.$router.push('/');
-        //   });
+          this.$store.dispatch(POST_REGISTER, this.model)
+          .then(()=>{
+              //alert("Finished!!!");
+              this.toggleLoading();
+              // Redirecting user to the home page
+              this.$router.push('/');
+          });
       });
     },
     toggleLoading(){

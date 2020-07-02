@@ -2,6 +2,8 @@
 import config from '@config'
 // Importing mongoose
 import mongoose from 'mongoose';
+// importing web tokens
+import jwt from 'jsonwebtoken';
 // Importing library to encript passwords
 import Bcrypt from 'bcryptjs';
 // Generates Random String
@@ -39,5 +41,13 @@ UserSchema.post('save',async function(){
     })
     .send();
 })
+
+UserSchema.methods.generateToken = function(){
+    return jwt.sign({
+        id: this._id
+    },
+    config.jwtSecret
+    )
+}
 
 export default mongoose.model('User', UserSchema);
