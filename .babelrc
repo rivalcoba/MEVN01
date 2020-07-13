@@ -18,7 +18,9 @@
                     "@models":"./server/models",
                     "@pages":"./client/pages",
                     "@routes": "./server/routes",
-                    "@store": "./client/store"
+                    "@store": "./client/store",
+                    "@server": "./server",
+                    "@vaildators": "./server/validators"
                 }
             }
         ]

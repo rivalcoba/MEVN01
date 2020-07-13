@@ -5,14 +5,14 @@
             <div class="w-full bg-white shadow mt-5 rounded-sm p-8">
                 <ValidationObserver ref="form">
                     <text-input
-                    name="Name"
+                    name="name"
                     rules="required"
                     :value="model.name"
                     v-model="model.name"
                     placeholder="Enter Your Names"></text-input>
 
                     <text-input
-                    name="E-mail"
+                    name="email"
                     rules="required|email"
                     :value="model.email"
                     v-model="model.email"
@@ -20,7 +20,7 @@
 
                     <text-input
                     type="password"
-                    name="Password"
+                    name="password"
                     rules="required|min:6"
                     :value="model.password"
                     v-model="model.password"
@@ -44,7 +44,7 @@
 // Importing form Validators
 import {ValidationProvider, ValidationObserver, validate} from 'vee-validate';
 // Importing client requests or client actions
-import {POST_REGISTER} from '@client/store/auth/actions'
+import {POST_REGISTER, SET_AUTH} from '@client/store/auth/actions'
 
 export default {
     data: ()=>({
@@ -69,11 +69,26 @@ export default {
           this.toggleLoading();
           // An action returns a promise
           this.$store.dispatch(POST_REGISTER, this.model)
-          .then(()=>{
+          .then(response=>{
               //alert("Finished!!!");
               this.toggleLoading();
+              // Persist on local storage
+              localStorage.setItem('auth', JSON.stringify(response.data))
+              // Commit auth succesfull
+              this.$store.commit(SET_AUTH, response.data)
               // Redirecting user to the home page
               this.$router.push('/');
+          })
+          .catch(error => {
+              this.toggleLoading()
+              let backendErrors = {};
+              //console.log(">" + Object.keys(error.response.data))
+              Object.keys(error.response.data).forEach(field => {
+                  // Adding errors from the backend to the observer
+                  backendErrors[field] = [error.response.data[field]]
+              })
+              //console.log("> " + Object.keys(backendErrors))
+              this.$refs.form.setErrors(backendErrors)
           });
       });
     },

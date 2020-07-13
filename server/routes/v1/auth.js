@@ -1,6 +1,9 @@
 // Import Router from express
 import { Router } from 'express';
 
+// Importing validator
+import registerValidator from '@vaildators/register'
+
 // Import Controller
 import authController from '@controllers/v1/auth.controller';
 
@@ -11,7 +14,7 @@ const authRouter = new Router();
 authRouter.post('/login', authController.login);
 
 // Register register method
-authRouter.post('/register', authController.register);
+authRouter.post('/register', registerValidator, authController.register);
 
 // Exporting Router
 export default authRouter;
