@@ -5,7 +5,7 @@ import Vue from 'vue';
 import './styles/main.css';
 
 // Importintg vuex store
-import store from './store'
+import store from './store';
 
 // Importando las rutas para el Router de Vue
 import router from './routes';
@@ -17,7 +17,7 @@ import Router from 'vue-router';
 import Main from './pages/Main.vue';
 
 // Importing validator for extend rules
-import validations from './validations'
+import validations from './validations';
 
 // Importing custom component
 import TextInput from '@components/TextInput.vue';
@@ -42,5 +42,5 @@ const app = new Vue({
     el: '#app',
     router,
     store,
-    render: h=>h(Main)
+    render: (h) => h(Main),
 });

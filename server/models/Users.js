@@ -1,5 +1,5 @@
 // importing configuration
-import config from '@config'
+import config from '@config';
 // Importing mongoose
 import mongoose from 'mongoose';
 // importing web tokens
@@ -18,36 +18,38 @@ const UserSchema = new mongoose.Schema({
     updatedAt: Date,
     password: String,
     emailConfirmedAt: Date,
-    emailConfirmCode: String
+    emailConfirmCode: String,
 });
 
 // Is executed before saving
 // No use arrow functions when defining schemas
 // do not bid the "this"
-UserSchema.pre('save', function(){
+UserSchema.pre('save', function () {
     this.password = Bcrypt.hashSync(this.password);
     this.emailConfirmCode = randomstring.generate(72);
     this.createdAt = new Date();
 });
 
-UserSchema.post('save',async function(){
-    console.log(`> CODE: ${config.url}/auth/emails/confirm/${this.emailConfirmCode}`);
+UserSchema.post('save', async function () {
+    console.log(
+        `> CODE: ${config.url}/auth/emails/confirm/${this.emailConfirmCode}`
+    );
     await new Mail('confirm-account')
-    .to(this.email, this.name)
-    .subject('Please Confirm your account')
-    .data({
-        name: this.name,
-        url: `${config.url}/auth/emails/confirm/${this.emailConfirmCode}`
-    })
-    .send();
-})
+        .to(this.email, this.name)
+        .subject('Please Confirm your account')
+        .data({
+            name: this.name,
+            url: `${config.url}/auth/emails/confirm/${this.emailConfirmCode}`,
+        })
+        .send();
+});
 
-UserSchema.methods.generateToken = function(){
-    return jwt.sign({
-        id: this._id
-    },
-    config.jwtSecret
-    )
-}
+UserSchema.methods.generateToken = function () {
+    return jwt.sign({ id: this._id }, config.jwtSecret);
+};
+
+UserSchema.methods.comparePasswords = function (plainPassword) {
+    return Bcrypt.compareSync(plainPassword, this.password);
+};
 
 export default mongoose.model('User', UserSchema);

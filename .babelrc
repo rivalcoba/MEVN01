@@ -20,7 +20,7 @@
                     "@routes": "./server/routes",
                     "@store": "./client/store",
                     "@server": "./server",
-                    "@vaildators": "./server/validators"
+                    "@validators": "./server/validators"
                 }
             }
         ]

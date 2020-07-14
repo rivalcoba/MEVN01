@@ -3,21 +3,21 @@ import Express from 'express';
 // Importing ORM Mongoose
 import Mongoose from 'mongoose';
 // Registering body-parser module
-import BodyParser from 'body-parser'
+import BodyParser from 'body-parser';
 // Importing Morgan
-import Morgan from 'morgan'
+import Morgan from 'morgan';
 // Importing config
 import config from '@config';
 // Importing Path
-import path from "path"
+import path from 'path';
 // Importing Routes
 import v1Router from '@routes';
 // Importing webpack
-import Webpack from 'webpack'
+import Webpack from 'webpack';
 // Importing Webpack config
-import WebpackConfig from '../webpack.config'
+import WebpackConfig from '../webpack.config';
 // Importing Hot Module
-import WebpackHotMiddleware from 'webpack-hot-middleware'
+import WebpackHotMiddleware from 'webpack-hot-middleware';
 // Importing Webpack middleware
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 
@@ -31,19 +31,21 @@ Mongoose.connect(config.databaseUrl, {
 const app = Express();
 
 // Registering body-parser
-app.use(BodyParser.json())
+app.use(BodyParser.json());
 
 // Registering morgan
-app.use(Morgan('tiny'));  
+app.use(Morgan('tiny'));
 
 // Creating the compiler
 const compiler = Webpack(WebpackConfig);
 
 // Adding the compiler to the express middleware
-app.use(WebpackDevMiddleware(compiler,{
-    hot: true,
-    publicPath: WebpackConfig.output.publicPath
-}));
+app.use(
+    WebpackDevMiddleware(compiler, {
+        hot: true,
+        publicPath: WebpackConfig.output.publicPath,
+    })
+);
 
 // Adding the compiler to the Hot webpack Module
 app.use(WebpackHotMiddleware(compiler));
@@ -56,8 +58,8 @@ app.use(v1Router);
 app.use(Express.static(path.resolve(__dirname, 'public')));
 
 // Respond any url like this...
-app.get("*",(req, res)=>{
-    res.sendFile(path.resolve(__dirname, 'public/index.html'))
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public/index.html'));
 });
 
 // Function of listen

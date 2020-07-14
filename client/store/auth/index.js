@@ -10,13 +10,13 @@ try {
 } catch (error) {
     initialState = {
         user: null,
-        token : null
-    }
+        token: null,
+    };
 }
 
-export default{
+export default {
     state: initialState,
     actions,
     getters,
-    mutations
-}
+    mutations,
+};
