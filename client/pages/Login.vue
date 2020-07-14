@@ -35,14 +35,16 @@
 </template>
 
 <script>
+// Importing mixins
+import formMixin from '@client/mixins/form'
 // Importing form Validators
 import {ValidationProvider, ValidationObserver, validate} from 'vee-validate';
 // Importing client requests or client actions
 import {POST_LOGIN, SET_AUTH} from '@client/store/auth/actions'
 
 export default {
+    mixins: [formMixin],
     data: ()=>({
-        loading: false,
         model: {
             email:'',
             password:''
@@ -84,9 +86,6 @@ export default {
               this.$refs.form.setErrors(backendErrors)
           });
       });
-    },
-    toggleLoading(){
-        this.loading = !this.loading;
     }
   }
 }
