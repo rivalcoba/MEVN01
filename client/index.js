@@ -24,6 +24,9 @@ import TextInput from '@components/TextInput.vue';
 import Loader from '@components/Loader.vue';
 import Button from '@components/Button.vue';
 
+// Inporting Global Mixins
+import authMixin from '@client/mixins/auth'
+
 // Registrando el Router en Vue
 // Registra modulos como "router-link"
 // y "raouter-vue" entro otros
@@ -31,6 +34,9 @@ Vue.use(Router);
 
 // Apply validations
 validations.apply();
+
+// Add global Mixins
+Vue.mixin(authMixin)
 
 // Registering custom components
 Vue.component('btn', Button);

@@ -3,6 +3,8 @@ import client from '@client/utils/axios';
 
 export const SET_AUTH = 'SET_AUTH';
 
+export const UNSET_AUTH = 'UNSET_AUTH';
+
 export const POST_REGISTER = 'POST_REGISTER';
 
 export const POST_LOGIN = 'POST_LOGIN'

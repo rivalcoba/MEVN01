@@ -40,7 +40,7 @@ import formMixin from '@client/mixins/form'
 // Importing form Validators
 import {ValidationProvider, ValidationObserver, validate} from 'vee-validate';
 // Importing client requests or client actions
-import {POST_LOGIN, SET_AUTH} from '@client/store/auth/actions'
+import {POST_LOGIN} from '@client/store/auth/actions'
 
 export default {
     mixins: [formMixin],
@@ -67,12 +67,9 @@ export default {
           .then(response=>{
               //alert("Finished!!!");
               this.toggleLoading();
-              // Persist on local storage
-              localStorage.setItem('auth', JSON.stringify(response.data))
-              // Commit auth succesfull
-              this.$store.commit(SET_AUTH, response.data)
-              // Redirecting user to the home page
-              this.$router.push('/');
+              
+              // Using mixin to set Auth
+              this.setAuth(response.data)              
           })
           .catch(error => {
               this.toggleLoading()

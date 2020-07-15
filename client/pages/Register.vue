@@ -74,12 +74,8 @@ export default {
           .then(response=>{
               //alert("Finished!!!");
               this.toggleLoading();
-              // Persist on local storage
-              localStorage.setItem('auth', JSON.stringify(response.data))
-              // Commit auth succesfull
-              this.$store.commit(SET_AUTH, response.data)
-              // Redirecting user to the home page
-              this.$router.push('/');
+              // Using mixin to set Auth
+              this.setAuth(response.data)
           })
           .catch(error => {
               this.toggleLoading()
