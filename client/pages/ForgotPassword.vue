@@ -1,7 +1,7 @@
 <template>
     <div class="container my-16 w-full h-12 mx-auto">
         <div class="max-w-xs mx-auto h-12">
-            <h1 class="text-lg text-center text-gold">Login</h1>
+            <h1 class="text-lg text-center text-gold">Forgot Password</h1>
             <div class="w-full bg-white shadow mt-5 rounded-sm p-8">
                 <ValidationObserver ref="form">
                     
@@ -12,23 +12,11 @@
                     v-model="model.email"
                     placeholder="Enter Your Email"></text-input>
 
-                    <text-input
-                    type="password"
-                    name="password"
-                    rules="required|min:6"
-                    :value="model.password"
-                    v-model="model.password"
-                    placeholder="Enter Your Password"></text-input>
-
-                    <div class="my-4 flex justify-center items-center">
-                        <router-link to="/auth/passwords/email" class="no-underline text-brown">Forgot Password?</router-link>
-                    </div>
-
                     <btn
-                    label="Sign In"
+                    label="Send Password Reset Link"
                     :disabled="loading"
                     :loading="loading"
-                    @click="login"
+                    @click="forgotPassword"
                     />
 
                     <!-- <button @click="register" class="w-full mt-3 py-3 bg-emerald text-white rounded-sm focus:outline-none hover:bg-emerald-light">Sing Up</button> -->
@@ -44,14 +32,13 @@ import formMixin from '@client/mixins/form'
 // Importing form Validators
 import {ValidationProvider, ValidationObserver, validate} from 'vee-validate';
 // Importing client requests or client actions
-import {POST_LOGIN} from '@client/store/auth/actions'
+import {POST_FORGOT_PASSWORD} from '@store/auth/actions'
 
 export default {
     mixins: [formMixin],
     data: ()=>({
         model: {
-            email:'',
-            password:''
+            email:''
         }
     }),
     components: {
@@ -59,7 +46,7 @@ export default {
         ValidationObserver
     },
     methods: {
-    login(){
+    forgotPassword(){
       this.$refs.form.validate().then(isValid=>{
           if(!isValid){
               return;
@@ -67,13 +54,13 @@ export default {
           // Change loading state
           this.toggleLoading();
           // An action returns a promise
-          this.$store.dispatch(POST_LOGIN, this.model)
+          this.$store.dispatch(POST_FORGOT_PASSWORD, this.model)
           .then(response=>{
               //alert("Finished!!!");
               this.toggleLoading();
               
-              // Using mixin to set Auth
-              this.setAuth(response.data)              
+              // Navigate to the homepage
+              this.$router.push('/')             
           })
           .catch(error => {
               this.toggleLoading()
