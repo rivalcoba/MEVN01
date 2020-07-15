@@ -10,6 +10,9 @@ import registerValidator from '@validators/register';
 // Import Controller
 import authController from '@controllers/v1/auth.controller';
 
+// Import forgot password validator
+import forgotPasswordValidator from '@validators/forgot-password'
+
 // Create an instance from Express Router
 const authRouter = new Router();
 
@@ -20,7 +23,7 @@ authRouter.post('/login', loginValidator, authController.login);
 authRouter.post('/register', registerValidator, authController.register);
 
 // Reset Password Route
-authRouter.post('/passwords/email', authController.forgotPassword)
+authRouter.post('/passwords/email', forgotPasswordValidator, authController.forgotPassword)
 
 // Exporting Router
 export default authRouter;
