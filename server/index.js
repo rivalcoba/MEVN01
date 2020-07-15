@@ -34,7 +34,7 @@ const app = Express();
 app.use(BodyParser.json());
 
 // Registering morgan
-app.use(Morgan('tiny'));
+app.use(Morgan('dev'));
 
 // Creating the compiler
 const compiler = Webpack(WebpackConfig);

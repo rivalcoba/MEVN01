@@ -41,8 +41,19 @@ const register = async (req, res) => {
     return res.status(201).json({ user, token });
 };
 
+// Forgot Password Controller
+const forgotPassword = async (req, res)=>{
+    const {email} = req.body
+    const user = await User.findOne({email})
+    await user.forgotPassword()
+    return res.json({
+        message: 'Password reset link sent.'
+    })
+}
+
 // Exporting methods
 export default {
     login,
     register,
+    forgotPassword
 };

@@ -10,6 +10,8 @@ import Bcrypt from 'bcryptjs';
 import randomstring from 'randomstring';
 // Importing mail package
 import Mail from '@fullstackjs/mail';
+// Import password reset model
+import PasswordReset from '@models/PasswordReset'
 
 const UserSchema = new mongoose.Schema({
     name: String,
@@ -51,5 +53,27 @@ UserSchema.methods.generateToken = function () {
 UserSchema.methods.comparePasswords = function (plainPassword) {
     return Bcrypt.compareSync(plainPassword, this.password);
 };
+
+UserSchema.methods.forgotPassword = async function(){
+    // Creating the reset token
+    const token = randomstring.generate(72)
+    
+    // Create document reset password
+    await PasswordReset.create({
+        token,
+        email: this.email,
+        createdAt: new Date()
+    })
+
+    // Sending Mail
+    await new Mail('forgot-password')
+    .to(this.email, this.name)
+    .subject('Password reset From MEVN')
+    .data({
+        url: `${config.url}/auth/passwords/reset/${token}`,
+        name: this.name
+    })
+    .send()
+}
 
 export default mongoose.model('User', UserSchema);

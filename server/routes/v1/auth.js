@@ -19,5 +19,8 @@ authRouter.post('/login', loginValidator, authController.login);
 // Register register method
 authRouter.post('/register', registerValidator, authController.register);
 
+// Reset Password Route
+authRouter.post('/passwords/email', authController.forgotPassword)
+
 // Exporting Router
 export default authRouter;
