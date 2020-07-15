@@ -6,6 +6,7 @@ import Login from '@pages/Login.vue';
 import Register from '@pages/Register.vue';
 import Home from '@pages/Home.vue';
 import ForgotPassword from '@pages/ForgotPassword.vue'
+import ResetPassword from '@pages/ResetPassword.vue'
 
 export default new Router({
     mode: 'history',
@@ -25,6 +26,10 @@ export default new Router({
         {
             path: '/auth/passwords/email',
             component: ForgotPassword
+        },
+        {
+            path: '/auth/passwords/reset/:token',
+            component: ResetPassword
         }
     ],
 });
