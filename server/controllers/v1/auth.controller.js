@@ -74,10 +74,30 @@ const resetPassword = async (req,res)=>{
     })
 }
 
+const emailConfirm = async (req, res)=>{
+    const user = await User.findOneAndUpdate({
+        email: req.user.email
+    },{
+        emailConfirmCode: null,
+        emailConfirmAt: new Date()
+    },{
+        new: true
+    })
+
+    // Generate a toke for the user
+    const token = user.generateToken()
+
+    return res.json({
+        user,
+        token
+    })
+} 
+
 // Exporting methods
 export default {
     login,
     register,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    emailConfirm
 };
