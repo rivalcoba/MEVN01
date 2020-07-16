@@ -20,6 +20,7 @@ export default{
             this.$store.commit(SET_AUTH, payload)
             // Redirecting user to the home page
             this.$router.push('/');
+            document.location.reload(true)
         },
         unsetAuth(){
             // Remove auth from browser

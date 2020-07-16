@@ -73,7 +73,9 @@ export default {
               this.toggleLoading();
               
               // Using mixin to set Auth
-              this.setAuth(response.data)              
+              this.setAuth(response.data)
+              // REf: https://github.com/vuejs/vue-router/issues/2872
+              this.$router.push('/').catch(err=>{})          
           })
           .catch(error => {
               this.toggleLoading()

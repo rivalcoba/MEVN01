@@ -1,6 +1,9 @@
 // Iport a user model
 import User from '@models/Users';
+import PasswordReset from '@models/PasswordReset'
 import { response } from 'express';
+// Importing bcryp for hashing
+import Bcrypt from 'bcryptjs'
 
 // Controller of all authentication end points
 
@@ -51,9 +54,30 @@ const forgotPassword = async (req, res)=>{
     })
 }
 
+const resetPassword = async (req,res)=>{
+    // Get user from the request
+    const {user} = req
+    // Find an update the user with the new password
+    await User.findOneAndUpdate({
+        email: user.email
+    },{
+        password: Bcrypt.hashSync(req.body.password)
+    })
+    // Delete the password reset
+    await PasswordReset.findOneAndDelete({
+        email: user.email
+    })
+
+    // Return success
+    return res.json({
+        message: 'Password reset successfully'
+    })
+}
+
 // Exporting methods
 export default {
     login,
     register,
-    forgotPassword
+    forgotPassword,
+    resetPassword
 };

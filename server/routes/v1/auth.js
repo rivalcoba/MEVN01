@@ -13,6 +13,9 @@ import authController from '@controllers/v1/auth.controller';
 // Import forgot password validator
 import forgotPasswordValidator from '@validators/forgot-password'
 
+// Import reset password validator
+import resetPasswordValidator from '@validators/reset-password'
+
 // Create an instance from Express Router
 const authRouter = new Router();
 
@@ -24,6 +27,9 @@ authRouter.post('/register', registerValidator, authController.register);
 
 // Reset Password Route
 authRouter.post('/passwords/email', forgotPasswordValidator, authController.forgotPassword)
+
+// Registering password Reset
+authRouter.post('/passwords/reset', resetPasswordValidator, authController.resetPassword)
 
 // Exporting Router
 export default authRouter;

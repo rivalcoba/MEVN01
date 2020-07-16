@@ -49,7 +49,8 @@ export default {
     },
     methods: {
     resetPassword(){
-      this.$refs.form.validate().then(isValid=>{
+      this.$refs.form.validate()
+      .then(isValid=>{
           if(!isValid){
               return;
           }
@@ -65,7 +66,7 @@ export default {
               this.toggleLoading();
               
               // Using mixin to set Auth
-              this.$route.push('/')         
+              this.$router.push('/')         
           })
           .catch(error => {
               this.toggleLoading()
