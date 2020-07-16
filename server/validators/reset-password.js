@@ -25,6 +25,19 @@ export default async (req, res, next) => {
             )
         }
 
+        const timeInMinutes = Math.ceil((new Date().getTime() - new Date(existingReset.createdAt).getTime())/60000)
+
+        if(timeInMinutes > 5){
+            // Delete the password Reset
+            await PasswordReset.findOneAndDelete({token})
+            // Throw a yup error
+            throw new Yup.ValidationError(
+                'Reset Token Expired',
+                req.body,
+                'password' // Error Path
+            )
+        }
+
         // If we fine an existing reset
         const user = await User.findOne({email: existingReset.email})
 

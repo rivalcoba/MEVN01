@@ -28,7 +28,7 @@ export default{
             // Remove auth from store
             this.$store.commit(UNSET_AUTH)
             // Navigate to
-            //this.$router.push('/')
+            this.$router.push('/').catch(err=>{})
         }
     }
 }

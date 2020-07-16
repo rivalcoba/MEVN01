@@ -66,7 +66,7 @@ export default {
               this.toggleLoading();
               
               // Using mixin to set Auth
-              this.$router.push('/')         
+              this.$router.push('/').catch(err=>{})         
           })
           .catch(error => {
               this.toggleLoading()
