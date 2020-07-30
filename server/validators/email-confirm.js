@@ -2,12 +2,13 @@
 import * as Yup from 'yup';
 import User from '@models/Users'
 
-// Creating validation schema
+// Creating EmailConfirm validation schema
 const EmailConfirmSchema = Yup.object().shape({
     token: Yup.string().required()
 });
 
 export default async (req, res, next) =>{
+    const {token} = req.body
     try {
         await EmailConfirmSchema.validate(req.body)
         const user = await User.findOne({emailConfirmCode: token})

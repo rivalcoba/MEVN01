@@ -79,7 +79,7 @@ const emailConfirm = async (req, res)=>{
         email: req.user.email
     },{
         emailConfirmCode: null,
-        emailConfirmAt: new Date()
+        emailConfirmedAt: new Date()
     },{
         new: true
     })
